@@ -1,49 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Image Outline Animator</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Image Outline Animator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <h1>Outline Animator✨</h1>
-      <p>Upload any picture with outlines (like the Hanuman image), and watch it animate into an ASCII-style masterpiece!</p>
-    </header>
-    
-    <div class="controls-card">
-      <div class="control-group">
-        <label for="imageUpload">1. Choose Image</label>
-        <input type="file" id="imageUpload" accept="image/*" />
-      </div>
+    <div class="container">
+        <header>
+            <h1>Outline Animator✨</h1>
+            <p>Upload any picture with outlines (like the Hanuman image), and watch it animate into an ASCII-style
+                masterpiece!</p>
+        </header>
 
-      <div class="control-group">
-        <label for="charInput">2. Character</label>
-        <input type="text" id="charInput" value="*" maxlength="1" />
-      </div>
+        <div class="controls-card">
+            <div class="control-group">
+                <label for="imageUpload">1. Choose Image</label>
+                <input type="file" id="imageUpload" accept="image/*" />
+            </div>
 
-      <div class="control-group">
-        <label for="speedInput">3. Animation Speed</label>
-        <div class="slider-wrapper">
-          <span>🐢</span>
-          <input type="range" id="speedInput" min="1" max="100" value="20" />
-          <span>🐇</span>
+            <div class="control-group">
+                <label for="charInput">2. Character</label>
+                <input type="text" id="charInput" value="*" maxlength="1" />
+            </div>
+
+            <div class="control-group">
+                <label for="styleInput">3. Style</label>
+                <select id="styleInput" class="style-select">
+                    <option value="90s">90's ASCII</option>
+                    <option value="genz">Gen Z Pencil</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="speedInput">4. Animation Speed</label>
+                <div class="slider-wrapper">
+                    <span>🐢</span>
+                    <input type="range" id="speedInput" min="1" max="100" value="20" />
+                    <span>🐇</span>
+                </div>
+            </div>
+
+            <div class="control-group" style="align-items: flex-end;">
+                <button id="startBtn">Animate Now!</button>
+            </div>
         </div>
-      </div>
 
-      <div class="control-group" style="align-items: flex-end;">
-        <button id="startBtn">Animate Now!</button>
-      </div>
+        <div class="canvas-container">
+            <div id="loading" style="display: none;">Processing Image...</div>
+            <canvas id="outputCanvas"></canvas>
+        </div>
     </div>
 
-    <div class="canvas-container">
-      <div id="loading" style="display: none;">Processing Image...</div>
-      <canvas id="outputCanvas"></canvas>
-    </div>
-  </div>
-  
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
