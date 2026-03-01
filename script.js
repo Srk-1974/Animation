@@ -99,7 +99,7 @@ function processImage() {
         // Calculate Luma (brightness)
         const luma = 0.299 * r + 0.587 * g + 0.114 * b;
         if (luma < 150) { // Threshold for dark edges
-          tempPoints.push({ x, y });
+          tempPoints.push({ x, y, r, g, b });
         }
       }
     }
@@ -112,9 +112,12 @@ function processImage() {
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
         const idx = (y * width + x) * 4;
+        const r = data[idx];
+        const g = data[idx + 1];
+        const b = data[idx + 2];
         const a = data[idx + 3];
         if (a > 50) {
-          tempPoints.push({ x, y });
+          tempPoints.push({ x, y, r, g, b });
         }
       }
     }
@@ -182,7 +185,6 @@ function startAnimation() {
     ctx.shadowBlur = 4;
     ctx.shadowColor = '#00ff88';
   } else {
-    ctx.strokeStyle = '#cccccc'; // Graphite Pencil Color
     ctx.lineWidth = 1;
     ctx.shadowBlur = 0;
     ctx.lineJoin = 'round';
@@ -203,6 +205,11 @@ function startAnimation() {
         ctx.fillText(ch, p.x, p.y);
       } else {
         if (lastPoint) {
+          if (style === 'color-pencil') {
+            ctx.strokeStyle = `rgb(${Math.max(0, p.r - 30)}, ${Math.max(0, p.g - 30)}, ${Math.max(0, p.b - 30)})`; // Slightly darker for pencil look
+          } else {
+            ctx.strokeStyle = '#cccccc'; // Graphite Pencil Color
+          }
           // Check if points are close enough to draw a continuous line
           const dist = Math.hypot(p.x - lastPoint.x, p.y - lastPoint.y);
           if (dist < 20) {
